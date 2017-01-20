@@ -1,7 +1,20 @@
 h1 {
     color: darkred;
     font-variant: small-caps;
+    padding-left: 8px;
 }
+a {
+    color: darkred;
+    font-variant: small-caps;
+    text-decoration: none;
+    font-size: 25px;
+    padding: 8px 10px;
+}
+a:hover {
+    background: darkred; /* Цвет фона под ссылкой */
+    color: black; /* Цвет ссылки */
+}
+
 ul {
     list-style-type: none;
     margin: 0;
@@ -17,11 +30,10 @@ li a {
     text-decoration: none;
 }
 
-/* Change the link color on hover */
 li a:hover {
     background-color: #555;
     color: white;
 }
 body {
-    background: white url("images/Mafia.jpg") no-repeat left top;
+    background: black url("images/Mafia.jpg") no-repeat right top;
 }

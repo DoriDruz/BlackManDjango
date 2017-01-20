@@ -6,5 +6,6 @@ from .models import *
 app_name = 'mafia_tables'
 urlpatterns = [
     url(r'^$', views.index, name='index'),
-    url(r'^(?P<BusinessType_id>[0-9]+)/$', views.detail, name='detail'),
+    url(r'^(?P<Person_id>[0-9]+)/$', views.detail, name='detail'),
+    url(r'^([0-9]+)\/([A-Z]{1}[a-z]+)/$', views.taskInfo, name='taskInfo'),
 ]

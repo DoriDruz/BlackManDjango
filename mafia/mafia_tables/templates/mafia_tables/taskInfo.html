@@ -1,0 +1,18 @@
+{% load staticfiles %}
+    <link rel="stylesheet" type="text/css" href="{% static 'mafia_tables/style.css' %}" />
+{% if task_obj %}
+    <h1>Tasks for {{ task_obj.0.person }} :</h1>
+    {% for task in task_obj %}
+      <h1>--------------</h1>
+      <h1>Taskname: {{ task.tasks.name }}</h1>
+      <h1>Type: {{ task.tasks.mission_types }}</h1>
+      <h1>Date: {{ task.tasks.date }}</h1>
+      <h1>Profit: {{ task.tasks.profit }}</h1>
+    {% endfor %}
+    <h1>{{ task_obj.person.name }}</h1>
+    <a href="/mafia_tables/{{ task_obj.0.person.id }}">Back</a>
+    <a href="/mafia_tables/">Home</a>
+{% else %}
+  <h1>No tasks avaible</h1>
+  <a href="/mafia_tables/">Home</a>
+{% endif %}

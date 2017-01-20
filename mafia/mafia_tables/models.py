@@ -85,8 +85,8 @@ class PostTypes(models.Model):
 
 class RegionOfResponsibility(models.Model):
     name = models.CharField(max_length=45, blank=True, null=True)
-    business = models.ForeignKey(BusinessType, on_delete=models.DO_NOTHING, db_column='Business_id')  # Field name made lowercase.
-    district = models.ForeignKey(District, on_delete=models.DO_NOTHING, db_column='District_id')  # Field name made lowercase.
+    business = models.ForeignKey(BusinessType, on_delete=models.CASCADE, db_column='Business_id')  # Field name made lowercase.
+    district = models.ForeignKey(District, on_delete=models.CASCADE, db_column='District_id')  # Field name made lowercase.
 
     class Meta:
         managed = True

@@ -1,7 +1,18 @@
-{% load static %}
+{% load staticfiles %}
     <link rel="stylesheet" type="text/css" href="{% static 'mafia_tables/style.css' %}" />
 {% if all_obj %}
-    <h1>Profit for {{ all_obj.type }} : {{ all_obj.profit }} $</h1>
+    <h1>Statistics for {{ all_obj.name }} :</h1>
+    <h1>Post in Family - {{ all_obj.post_types }} </h1>
+    {% if all_obj.personToObey %}
+      <h1>To whom reports - {{ all_obj.personToObey }}</h1>
+    {% endif %}
+    <h1>Date of Birth - {{ all_obj.date_of_birth }}</h1>
+    <h1>Region of responsibility - {{ all_obj.region_of_responsibility }}</h1>
+    <h1>Which district controls - {{ all_obj.region_of_responsibility.district }}</h1>
+    <h1>Which business controls - {{ all_obj.region_of_responsibility.business }}</h1>
+    <h1>All profit get - {{ all_obj.post_types.profit }} + {{ all_obj.region_of_responsibility.business.profit }}</h1>
+    <a href="/mafia_tables/">Back</a>
+    <a href="/mafia_tables/{{ all_obj.id }}/{{ all_obj }}">Look for Tasks</a>
 {% else %}
 <h1>Mafia</h1>
 {% endif %}

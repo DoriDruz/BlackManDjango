@@ -3,7 +3,7 @@
 {% if all_tables %}
   <ul>
     {% for model in all_tables %}
-    <li><a href="/mafia_tables/{{ model.id }}">{{ model.type }} </a></li>
+    <li><a href="/mafia_tables/{{ model.id }}">{{ model.name }} </a></li>
     {% endfor %}
   </ul>
 {% else %}
