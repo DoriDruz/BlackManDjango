@@ -1,0 +1,7 @@
+{% load static %}
+    <link rel="stylesheet" type="text/css" href="{% static 'mafia_tables/style.css' %}" />
+{% if all_obj %}
+    <h1>Profit for {{ all_obj.type }} : {{ all_obj.profit }} $</h1>
+{% else %}
+<h1>Mafia</h1>
+{% endif %}

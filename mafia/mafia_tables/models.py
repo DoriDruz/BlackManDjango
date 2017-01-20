@@ -69,7 +69,7 @@ class PersonHasTasks(models.Model):
         unique_together = (('person', 'tasks'),)
 
     def __str__(self):
-        return 'task for ' + self.person.name
+        return 'Task for ' + self.person.name
 
 class PostTypes(models.Model):
     post = models.CharField(db_column='Post', max_length=45, blank=True, null=True)  # Field name made lowercase.
