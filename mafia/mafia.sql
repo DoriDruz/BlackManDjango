@@ -82,7 +82,6 @@ CREATE TABLE IF NOT EXISTS `Mafia`.`Person` (
   `Post_types_id` INT NOT NULL,
   `Person_id` INT NULL DEFAULT NULL,
   `name` VARCHAR(45) NULL,
-  `gun` DECIMAL NULL,
   `Date of Birth` DATE NULL,
   `Region_of_responsibility_id` INT NULL DEFAULT NULL,
   PRIMARY KEY (`id`),
@@ -151,9 +150,10 @@ ENGINE = InnoDB;
 -- Table `Mafia`.`Person_has_Tasks`
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `Mafia`.`Person_has_Tasks` (
+  `id` INT NOT NULL AUTO_INCREMENT,
   `Person_id` INT NOT NULL,
   `Tasks_id` INT NOT NULL,
-  PRIMARY KEY (`Person_id`, `Tasks_id`),
+  PRIMARY KEY (`id`, `Person_id`, `Tasks_id`),
   INDEX `fk_Person_has_Tasks_Tasks1_idx` (`Tasks_id` ASC),
   INDEX `fk_Person_has_Tasks_Person1_idx` (`Person_id` ASC),
   CONSTRAINT `fk_Person_has_Tasks_Person1`

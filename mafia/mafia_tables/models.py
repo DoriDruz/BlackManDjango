@@ -10,7 +10,6 @@ from __future__ import unicode_literals
 from django.db import models
 
 class BusinessType(models.Model):
-    id = models.IntegerField(primary_key=True)
     type = models.CharField(max_length=45, blank=True, null=True)
     profit = models.IntegerField(blank=True, null=True)
 
@@ -34,7 +33,6 @@ class District(models.Model):
         return self.name
 
 class MissionTypes(models.Model):
-    id = models.IntegerField(primary_key=True)
     type = models.CharField(db_column='Type', max_length=45, blank=True, null=True)  # Field name made lowercase.
     region_of_responsibility = models.ForeignKey('RegionOfResponsibility', on_delete=models.DO_NOTHING, db_column='Region_of_responsibility_id')  # Field name made lowercase.
 
@@ -48,11 +46,9 @@ class MissionTypes(models.Model):
 
 
 class Person(models.Model):
-    id = models.IntegerField(primary_key=True)
-    post_types = models.ForeignKey('PostTypes', on_delete=models.DO_NOTHING, db_column='Post_types_id')  # Field name made lowercase.
-    personType = models.ForeignKey('self', on_delete=models.CASCADE, db_column='Person_id', blank=True, null=True)  # Field name made lowercase.
     name = models.CharField(max_length=45, blank=True, null=True)
-    gun = models.DecimalField(max_digits=10, decimal_places=0, blank=True, null=True)
+    post_types = models.ForeignKey('PostTypes', on_delete=models.DO_NOTHING, db_column='Post_types_id')  # Field name made lowercase.
+    personToObey = models.ForeignKey('self', on_delete=models.CASCADE, db_column='Person_id', blank=True, null=True)  # Field name made lowercase.
     date_of_birth = models.DateField(db_column='Date of Birth', blank=True, null=True)  # Field name made lowercase. Field renamed to remove unsuitable characters.
     region_of_responsibility = models.ForeignKey('RegionOfResponsibility', on_delete=models.DO_NOTHING, db_column='Region_of_responsibility_id', blank=True, null=True)  # Field name made lowercase.
 
@@ -65,16 +61,18 @@ class Person(models.Model):
 
 
 class PersonHasTasks(models.Model):
-    person = models.ForeignKey(Person, on_delete=models.DO_NOTHING, db_column='Person_id')  # Field name made lowercase.
-    tasks = models.ForeignKey('Tasks', on_delete=models.DO_NOTHING, db_column='Tasks_id')  # Field name made lowercase.
+    person = models.ForeignKey(Person, models.DO_NOTHING, db_column='Person_id')  # Field name made lowercase.
+    tasks = models.ForeignKey('Tasks', models.DO_NOTHING, db_column='Tasks_id')  # Field name made lowercase.
 
     class Meta:
         managed = True
         db_table = 'person_has_tasks'
         unique_together = (('person', 'tasks'),)
 
+    def __str__(self):
+        return 'task for ' + self.person.name
+
 class PostTypes(models.Model):
-    id = models.IntegerField(primary_key=True)
     post = models.CharField(db_column='Post', max_length=45, blank=True, null=True)  # Field name made lowercase.
     profit = models.IntegerField(db_column='Profit', blank=True, null=True)  # Field name made lowercase.
 
@@ -87,7 +85,6 @@ class PostTypes(models.Model):
 
 
 class RegionOfResponsibility(models.Model):
-    id = models.IntegerField(primary_key=True)
     name = models.CharField(max_length=45, blank=True, null=True)
     business = models.ForeignKey(BusinessType, on_delete=models.DO_NOTHING, db_column='Business_id')  # Field name made lowercase.
     district = models.ForeignKey(District, on_delete=models.DO_NOTHING, db_column='District_id')  # Field name made lowercase.
@@ -102,7 +99,6 @@ class RegionOfResponsibility(models.Model):
 
 
 class Tasks(models.Model):
-    id = models.IntegerField(primary_key=True)
     name = models.CharField(max_length=45, blank=True, null=True)
     date = models.DateField(db_column='Date', blank=True, null=True)  # Field name made lowercase.
     profit = models.IntegerField(db_column='Profit', blank=True, null=True)  # Field name made lowercase.
