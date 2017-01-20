@@ -1,0 +1,11 @@
+{% load staticfiles %}
+    <link rel="stylesheet" type="text/css" href="{% static 'mafia_tables/style.css' %}" />
+{% if all_tables %}
+  <ul>
+    {% for model in all_tables %}
+    <li><a href="/mafia_tables/index.html">{{ model.type }}</a></li>
+    {% endfor %}
+  </ul>
+{% else %}
+<h1>Mafia</h1>
+{% endif %}
