@@ -22,7 +22,6 @@ class BusinessType(models.Model):
 
 
 class District(models.Model):
-    id = models.IntegerField(primary_key=True)
     name = models.CharField(max_length=45, blank=True, null=True)
 
     class Meta:
@@ -34,7 +33,7 @@ class District(models.Model):
 
 class MissionTypes(models.Model):
     type = models.CharField(db_column='Type', max_length=45, blank=True, null=True)  # Field name made lowercase.
-    region_of_responsibility = models.ForeignKey('RegionOfResponsibility', on_delete=models.DO_NOTHING, db_column='Region_of_responsibility_id')  # Field name made lowercase.
+    region_of_responsibility = models.ForeignKey('RegionOfResponsibility', on_delete=models.CASCADE, db_column='Region_of_responsibility_id')  # Field name made lowercase.
 
     class Meta:
         managed = True
@@ -47,10 +46,10 @@ class MissionTypes(models.Model):
 
 class Person(models.Model):
     name = models.CharField(max_length=45, blank=True, null=True)
-    post_types = models.ForeignKey('PostTypes', on_delete=models.DO_NOTHING, db_column='Post_types_id')  # Field name made lowercase.
+    post_types = models.ForeignKey('PostTypes', on_delete=models.CASCADE, db_column='Post_types_id')  # Field name made lowercase.
     personToObey = models.ForeignKey('self', on_delete=models.CASCADE, db_column='Person_id', blank=True, null=True)  # Field name made lowercase.
     date_of_birth = models.DateField(db_column='Date of Birth', blank=True, null=True)  # Field name made lowercase. Field renamed to remove unsuitable characters.
-    region_of_responsibility = models.ForeignKey('RegionOfResponsibility', on_delete=models.DO_NOTHING, db_column='Region_of_responsibility_id', blank=True, null=True)  # Field name made lowercase.
+    region_of_responsibility = models.ForeignKey('RegionOfResponsibility', on_delete=models.CASCADE, db_column='Region_of_responsibility_id', blank=True, null=True)  # Field name made lowercase.
 
     class Meta:
         managed = True
@@ -61,8 +60,8 @@ class Person(models.Model):
 
 
 class PersonHasTasks(models.Model):
-    person = models.ForeignKey(Person, models.DO_NOTHING, db_column='Person_id')  # Field name made lowercase.
-    tasks = models.ForeignKey('Tasks', models.DO_NOTHING, db_column='Tasks_id')  # Field name made lowercase.
+    person = models.ForeignKey(Person, on_delete=models.CASCADE, db_column='Person_id')  # Field name made lowercase.
+    tasks = models.ForeignKey('Tasks', on_delete=models.CASCADE, db_column='Tasks_id')  # Field name made lowercase.
 
     class Meta:
         managed = True
@@ -105,7 +104,7 @@ class Tasks(models.Model):
     start_time = models.DateTimeField(db_column='Start_time', blank=True, null=True)  # Field name made lowercase.
     end_time = models.DateTimeField(db_column='End_time', blank=True, null=True)  # Field name made lowercase.
     real_end_time = models.DateTimeField(db_column='Real_end_time', blank=True, null=True)  # Field name made lowercase.
-    mission_types = models.ForeignKey(MissionTypes, on_delete=models.DO_NOTHING, db_column='Mission_types_id')  # Field name made lowercase.
+    mission_types = models.ForeignKey(MissionTypes, on_delete=models.CASCADE, db_column='Mission_types_id')  # Field name made lowercase.
 
     class Meta:
         managed = True
